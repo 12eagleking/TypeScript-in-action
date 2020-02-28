@@ -1,0 +1,24 @@
+// // v1.0.0 js
+// const express = require('express')
+// const { createProxyMiddleware } = require('http-proxy-middleware')
+
+import * as express from 'express'
+import { createProxyMiddleware } from 'http-proxy-middleware'
+
+const app = express()
+
+app.use('/api/**/*.action', createProxyMiddleware({
+  target: 'http://localhost:4001',
+  pathRewrite(path) {
+    return path.replace('/api', '').replace('.action', '.json')
+  }
+}))
+
+// app.use('/api', createProxyMiddleware({
+//   target: 'http://localhost:4001',
+//   pathRewrite(path) {
+//     return path.replace('/api', '/').replace('.action', '.json')
+//   }
+// }))
+
+app.listen(3000)

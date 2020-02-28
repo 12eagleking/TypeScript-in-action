@@ -1,0 +1,29 @@
+// // v1.0.0 js
+// const express = require('express')
+// const { createProxyMiddleware } = require('http-proxy-middleware')
+
+// const app = express()
+
+// // app.use('/api/**/*.action', createProxyMiddleware({
+// //   target: 'http://localhost:4000',
+// //   pathRewrite(path) {
+// //     return path.replace('/api', '').replace('.action', '.json')
+// //   }
+// // }))
+
+// app.use('/api', createProxyMiddleware({
+//   target: 'http://localhost:4000',
+//   pathRewrite(path) {
+//     return path.replace('/api', '').replace('.action', '.json')
+//   }
+// }))
+
+// app.listen(3000)
+
+const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+const app = express();
+
+app.use('/api', createProxyMiddleware({ target: 'http://www.example.org', changeOrigin: true }));
+app.listen(3000);
