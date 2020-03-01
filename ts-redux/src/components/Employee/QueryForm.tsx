@@ -8,13 +8,12 @@ import {
 import { FormComponentProps } from 'antd/lib/form'
 // import FormComponentProps from 'antd/lib/form'
 
-import { EmployeeRequest, EmployeeResponse } from '@/interface/employee'
+import { EmployeeRequest } from '@/interface/employee'
 import { departmentOptions } from './departmentOptions'
-import * as $api from '@/utils/request'
-import { GET_EMPLOYEE_URL } from '@/constants/urls'
 
 interface Props extends FormComponentProps {
-  onDataChange(data: EmployeeResponse): void
+  getData(param: EmployeeRequest, callback: () => void): void;
+  setLoading(payload: boolean): void;
 }
 
 // type State = EmployeeRequest 
@@ -38,12 +37,10 @@ class QueryForm extends React.Component<Props, EmployeeRequest> {
     })
   }
   queryEmployee(param: EmployeeRequest) {
-    // // TODO: ajax request
-    // this.props.onDataChange(undefined)
-    $api.get(GET_EMPLOYEE_URL, param)
-      .then(res => {
-        this.props.onDataChange(res.data)
-      })
+    this.props.setLoading(true)
+    this.props.getData(param, () => {
+      this.props.setLoading(false)
+    })
   }
   componentDidMount() {
     this.queryEmployee(this.state)
@@ -86,11 +83,3 @@ class QueryForm extends React.Component<Props, EmployeeRequest> {
 export default Form.create<Props>({
   name: 'employee_query'
 })(QueryForm)
-
-// export default Form.create({})(QueryForm)
-
-// const WrapQueryForm = Form.create<Props>({
-//   name: 'employee_query'
-// })(QueryForm);
-
-// export default WrapQueryForm;

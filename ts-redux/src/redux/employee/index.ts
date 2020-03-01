@@ -42,7 +42,8 @@ export function getEmployee(param: EmployeeRequest, callback: () => void) {
 
 export function createEmployee(param: CreateRequest, callback: () => void) {
   return (dispatch: Dispatch) => {
-    $api.post(CREATE_EMPLOYEE_URL, param)
+    // $api.post(CREATE_EMPLOYEE_URL, param)
+    $api.get(CREATE_EMPLOYEE_URL, param)
       .then(res => {
         dispatch({
           type: CREATE_EMPOYEE,

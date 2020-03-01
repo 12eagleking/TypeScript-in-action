@@ -8,8 +8,10 @@ export interface EmployeeInfo {
   key: number;
   name: string;
   department: string;
+  departmentId: number;
   hiredate: string;
   level: string;
+  levelId: number;
 }
 
 export type EmployeeResponse = EmployeeInfo[] | undefined
