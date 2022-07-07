@@ -2,7 +2,7 @@
   "name": "ts_base",
   "dependencies": {
     "jquery": "^3.4.1",
-    "moment": "^2.24.0"
+    "moment": "^2.29.4"
   },
   "scripts": {
     "start": "webpack-dev-server --mode=development --config ./build/webpack.config.js",
